@@ -12,11 +12,9 @@ function getTab(callback) {
 
 function execute(script, params, callback) {
 	getTab(function (tab) {
-		chrome.tabs.executeScript(tab.id, {file: 'jquery.min.js'}, function () {
-			chrome.tabs.executeScript(tab.id, {code: 'var config = ' + JSON.stringify(params)}, function () {
-				chrome.tabs.executeScript(tab.id, {file: script}, function (result) {
-					if (callback) callback(result[0]);
-				});
+		chrome.tabs.executeScript(tab.id, {code: 'var config = ' + JSON.stringify(params)}, function () {
+			chrome.tabs.executeScript(tab.id, {file: script}, function (result) {
+				if (callback) callback(result[0]);
 			});
 		});
 	});

@@ -1,9 +1,8 @@
 var result = '';
-$ = jQuery;
 
-if ($('#timer-play').length) {
+if (document.getElementById('timer-play') != null) {
 	result = 'play';
-} else if ($('#timer-pause').length) {
+} else if (document.getElementById('timer-pause') != null) {
 	result = 'pause';
 }
 

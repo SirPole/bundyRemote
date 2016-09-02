@@ -1,12 +1,1 @@
-var result = '';
-$ = jQuery;
-
-$('#timer-' + config)[0].click();
-
-if(config === 'play') {
-	result = 'pause';
-} else {
-	result = 'play';
-}
-
-result;
+document.getElementById('timer-' + config).click();
