@@ -1,7 +1,8 @@
-var bg = chrome.extension.getBackgroundPage();
+var BG = chrome.extension.getBackgroundPage();
+var URL = "*://ant.bundysw.com/report/dashboard/*";
 function getTab(callback) {
 	chrome.tabs.query({
-		"url": "*://ant.bundysw.com/report/dashboard/*"
+		"url": URL
 	}, function (tabs) {
 		tabs.forEach(function (tab) {
 			if (callback) callback(tab);
@@ -43,14 +44,24 @@ function updateIcon(state) {
 	}
 }
 
-getState(function (state) {
-	updateIcon(state);
+function update() {
+	getState(function (state) {
+		updateIcon(state);
+	});
+}
+
+chrome.webRequest.onCompleted.addListener(function (response) {
+	if(response.url.indexOf('?do=insertRecord-') >= 0) {
+		update();
+	}
+}, {
+	"urls" : [URL]
 });
 
 chrome.browserAction.onClicked.addListener(function () {
 	getState(function (state) {
-		execute('bundy.js', state, function (result) {
-			updateIcon(result);
-		});
+		execute('bundy.js', state);
 	});
 });
+
+update();

@@ -1,10 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "ANT Bundy button",
+  "name": "ANT BundySW remote",
   "description": "Simple remote for BundySW",
-  "version": "0.1",
+  "version": "0.2",
   "permissions": [
-    "tabs","<all_urls>"
+    "webRequest",
+    "tabs",
+    "<all_urls>"
   ],
   "browser_action": {
     "default_icon": "disabled.png",
@@ -12,6 +14,6 @@
   },
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   }
 }
